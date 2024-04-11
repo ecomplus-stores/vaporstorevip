@@ -2,7 +2,6 @@
 // load header options and contacts from content
 const header = _.cms('header') || {}
 const contacts = _.cms('contacts') || {}
-const themeCustom = _.settings.theme.custom || ''
 
 // social networks handled by contacts
 const networks = [
@@ -45,11 +44,6 @@ if (header.categories_list) {
   }
   isCategoriesNavFull = header.categories_list.full_width
 }
-const hasMegamenu = header.desktop_megamenu
-const isAlphabeticalOrderSubmenu = header.alphabetical_order_submenu
-const fullWidthSubmenu = header.full_width_submenu
-const isCentralizedLogo = header.centralized_logo
-const hasAllDepartments = header.menu_all_departments
 %>
 
 <div id="overlay" class="fade"></div>
@@ -76,33 +70,37 @@ const hasAllDepartments = header.menu_all_departments
   <div class="top-bar__nav d-none d-md-block">
     <div class="container-fluid">
       <div class="row">
-        <div class="col d-flex">
+        <div class="col">
           <nav class="top-bar__page-links">
             <% if (header.contacts_stripe.pages) { %>
-              <div class="<%= (themeCustom === 'ecom-beauty' && isCategoriesNavFull) ? 'd-lg-none' : '' %>">
-                <% header.contacts_stripe.pages.forEach(({ link, title }) => { %>
-                  <a href="<%= link %>"><%= title %></a>
-                <% }) %>
-              </div>
+              <% header.contacts_stripe.pages.forEach(({ link, title }) => { %>
+                <a href="<%= link %>"><%= title %></a>
+              <% }) %>
             <% } %>
           </nav>
           <% if (header.contacts_stripe.phone_wpp) { %>
-            <div class="top-bar__contacts-container">
-              <% if (contacts.whatsapp) { %>
-                <a href="javascript:;" target="_blank" rel="noopener" class="whatsapp-link"
-                  data-tel="<%= contacts.whatsapp.replace(/\D/g, '') %>">
-                  <i class="i-whatsapp"></i>
-                  <%= contacts.whatsapp %>
-                </a>
-                <% } %>
-              <% if (contacts.phone) { %>
-                <a href="tel:+<%= contacts.phone.replace(/\D/g, '') %>" target="_blank" rel="noopener">
-                  <i class="i-phone"></i>
-                  <%= contacts.phone %>
-                </a>
-              <% } %>
-            </div>
-            
+            <% if (contacts.whatsapp) { %>
+              <a
+                href="javascript:;"
+                target="_blank"
+                rel="noopener"
+                class="whatsapp-link"
+                data-tel="<%= contacts.whatsapp.replace(/\D/g, '') %>"
+              >
+                <i class="fab fa-whatsapp"></i>
+                <%= contacts.whatsapp %>
+              </a>
+            <% } %>
+            <% if (contacts.phone) { %>
+              <a
+                href="tel:+<%= contacts.phone.replace(/\D/g, '') %>"
+                target="_blank"
+                rel="noopener"
+              >
+                <i class="fas fa-phone"></i>
+                <%= contacts.phone %>
+              </a>
+            <% } %>
           <% } %>
         </div>
         <% if (header.contacts_stripe.socials) { %>
@@ -110,7 +108,7 @@ const hasAllDepartments = header.menu_all_departments
             <% networks.forEach(network => { %>
               <% if (contacts[network]) { %>
                 <a href="<%= contacts[network] %>" target="_blank" rel="noopener">
-                  <i class="i-<%= network %>"></i>
+                  <i class="fab fa-<%= network %>"></i>
                 </a>
               <% } %>
             <% }) %>
@@ -123,15 +121,15 @@ const hasAllDepartments = header.menu_all_departments
 
 <header class="header" id="header">
   <div class="header__container container-fluid">
-    <div class="header__row row<%= isCentralizedLogo ? ' header__row--centralized-logo' : '' %><%= isCentralizedLogo && isCategoriesNavFull ? ' header__row--full-width' : '' %>">
-      <div class="col-auto p-0 header__toggler-block">
+    <div class="header__row row">
+      <div class="col-auto p-0">
         <button
-          class="btn header__toggler<%= hasMegamenu ? ' d-lg-none' : '' %>"
+          class="btn header__toggler"
           type="button"
           onclick="toggleSidenav()"
           aria-label="Toggle side navigation"
         >
-          <i class="header__toggler-icon i-bars"></i>
+          <i class="header__toggler-icon fas fa-bars"></i>
           <% if (!categories.length) { %>
             <span class="d-none d-lg-inline">
               Menu
@@ -140,31 +138,18 @@ const hasAllDepartments = header.menu_all_departments
         </button>
       </div>
 
-      <div class="col col-lg-auto pl-1 pl-md-2 pl-lg-3 header__logo-block">
+      <div class="col col-lg-auto pl-1 pl-md-2 pl-lg-3">
         <a href="/">
           <%- await include('@/layout/inc/logo', { _ }) %>
         </a>
       </div>
 
-      <div class="order-lg-last col-auto p-0 header__buttons-block">
+      <div class="order-lg-last col-auto p-0">
         <div
           class="header__buttons"
           role="group"
           aria-label="<%= _.dictionary('myAccount') %>"
         >
-          <button
-            class="d-lg-none btn btn-lg"
-            id="mobile-search-btn"
-            type="button"
-            data-toggle="collapse"
-            data-target="#search-bar"
-            aria-expanded="true"
-            aria-controls="search-bar"
-            aria-controls="search-bar"
-            title="<%= _.dictionary('searchProducts') %>"
-          >
-            <i class="i-search"></i>
-          </button>
 
           <a
             id="user-button"
@@ -173,7 +158,16 @@ const hasAllDepartments = header.menu_all_departments
             href="/app/#/account/"
             title="<%= _.dictionary('myAccount') %>"
           >
-            <i class="i-user"></i>
+            <img src="/img/uploads/icone-minha-conta-nvs.png" alt="Minha Conta">
+          </a>
+          <a
+            id="atendimento-button"
+            class="btn btn-lg d-none d-md-inline"
+            role="button"
+            href="/pages/contato"
+            title="atendimento"
+          >
+            <img src="/img/uploads/icone-atendimento-nvs.png" alt="atendimento">
           </a>
           <a
             id="cart-button"
@@ -182,7 +176,7 @@ const hasAllDepartments = header.menu_all_departments
             href="/app/#/cart"
             title="<%= _.dictionary('openCart') %>"
           >
-            <i class="i-shopping-bag"></i>
+            <img src="/img/uploads/icone-carrinho-nvs.png" alt="carrinho de compras">
             <span id="cart-count" class="badge badge-primary"></span>
           </a>
         </div>
@@ -205,7 +199,7 @@ const hasAllDepartments = header.menu_all_departments
         const searchColSize = !isCategoriesNavFull && categories.length ? '-3' : ''
         %>
         <div
-          class="d-none d-lg-block col-12 col-lg<%= searchColSize %> collapse show"
+          class="d-lg-block col-12 col-lg<%= searchColSize %> collapse show"
           id="search-bar"
         >
           <form
@@ -227,7 +221,7 @@ const hasAllDepartments = header.menu_all_departments
               class="header__search-btn"
               aria-label="<%= _.dictionary('searchProducts') %>"
             >
-              <i class="i-search"></i>
+              <i class="fas fa-search"></i>
             </button>
             <div id="instant-search">
               <!--
@@ -253,119 +247,19 @@ const hasAllDepartments = header.menu_all_departments
           <% } %>
         </div>
       <% } %>
-
-      <% if (themeCustom === 'ecom-beauty' && isCategoriesNavFull) { %>
-        <% if (header.contacts_stripe.pages) { %>
-          <div class="header__page-links d-none d-lg-inline-block">
-            <% header.contacts_stripe.pages.forEach(({ link, title })=> { %>
-              <a href="<%= link %>">
-                <%= title %>
-              </a>
-            <% }) %>
-          </div>
-        <% } %>
-      <% } %>
-
-      <% if (categories && categories.length) { %>
-        <div class="d-none d-lg-block <%= isCategoriesNavFull ? 'col-12 order-lg-last' : 'col' %> header__nav-block">
-          <nav class="header__nav<%= isCategoriesNavFull ? ' header__nav--full' : '' %>">
-            <% if (hasAllDepartments) { %>
-              <div class="d-inline-block">
-                <a 
-                  href="javascript:;"
-                  class="header__category"
-                  id="cd-all"
-                  onmouseover="toggleSubmenu('all', this)"
-                  onclick="toggleSubmenu('all', this)"
-                >
-                  <%= header.name_all_departments || _.dictionary('all') %>
-                </a>
-                <nav class="header__submenu header__submenu--full" id="s-all">
-                  <div class="row">
-                    <% _.categories.forEach(({ name, slug, parent, _id }) => { %>
-                      <% if (!parent) { 
-                        %>
-                        <div class="col-12 col-lg-<%- isCategoriesNavFull ? '2' : '4' %>">
-                          <a 
-                            id="sd-all-<%= _id %>" 
-                            href="/<%= slug %>"
-                          >
-                            <%= name %>
-                          </a>
-                        <% const subcategories = _.categories.filter(({ parent }) => parent && parent.slug === slug) %>
-                        <% if (subcategories.length) { %>
-                          <div id="header__submenu-<%= slug %>">
-                            <ul class="header__links">
-                              <% subcategories.forEach(subcategory => { %>
-                                <li>
-                                  <a id="td-all-<%= subcategory._id %>" class="header__submenu-subcategory" href="/<%= subcategory.slug %>">
-                                    <%= subcategory.name %>
-                                  </a>
-                                </li>
-                                <% }) %>
-                              </ul>
-                            </div>
-                          <% } %>
-                          </div>
-                        <% } %>
-                      <% }) %>
-                    </div>
-                  </nav>
-              </div>
-            <% } %>
-            <% categories.forEach(({ slug, name, _id}) => { %>
-              <% let $categoryLink %>
-              <div class="d-inline-block">
-                <a
-                  href="javascript:;"
-                  class="header__category"
-                  id="cd-<%= _id %>"
-                  <%- hasMegamenu
-                    ? `onmouseover="toggleSubmenu('${slug}', this)" onclick="toggleSubmenu('${slug}', this, true)"`
-                    : `onclick="toggleSidenav('${slug}')"` %>
-                >
-                  <%= name %>
-                </a>
-                <%- $categoryLink %>
-                <%  if (slug && hasMegamenu) { %>
-                  <% const subcategories = _.categories.filter(({ parent }) => parent && parent.slug === slug) %>
-                  <% if (subcategories.length) { %>
-                    <%
-                      if (isAlphabeticalOrderSubmenu) {
-                        subcategories.sort((a, b)=> {
-                          return b.name > a.name ? -1 : 1
-                        })
-                      }
-                    %>
-                    <nav class="header__submenu<%= fullWidthSubmenu ? ' header__submenu--full' : '' %>" id="<%= `s-${slug.replace(/\//g, '_')}` %>">
-                      <% subcategories.forEach(subcategory => { %>
-                        <div>               
-                          <a id="sd-<%= subcategory._id %>" href="/<%= subcategory.slug %>"><%= subcategory.name %></a>
-                          <% const thirdCategories = _.categories.filter(({ parent }) => parent && parent.slug === subcategory.slug) %>
-                          <%
-                            if (isAlphabeticalOrderSubmenu) {
-                              thirdCategories.sort((a, b)=> {
-                                return b.name > a.name ? -1 : 1
-                              })
-                            }
-                          %>
-                          <% thirdCategories.forEach(thirdCategory => { %>
-                            <a id="td-<%= thirdCategory._id %>" class="header__submenu-subcategory" href="/<%= thirdCategory.slug %>">
-                              <%= thirdCategory.name %>
-                            </a>
-                          <% }) %>
-                        </div>
-                      <% }) %>
-                    </nav>
-                  <% } %>
-                <% } %>
-              </div>
-            <% }) %>
-          </nav>
-        </div>
-      <% } %>
     </div>
   </div>
+  <% if (categories && categories.length) { %>
+    <div id="nav-total" class="d-none d-lg-block <%= isCategoriesNavFull ? 'col-12 order-lg-last' : 'col' %>">
+      <nav class="header__nav<%= isCategoriesNavFull ? ' header__nav--full' : '' %>">
+        <% categories.forEach(({ slug, name }) => { %>
+          <a href="javascript:;" onclick="toggleSidenav('<%= slug %>')">
+            <%= ` ${name} ` %>
+          </a>
+        <% }) %>
+      </nav>
+    </div>
+  <% } %>
 </header>
 <% if (header.popup) { %>
   <div class="modal fade" id="popup-modal" tabindex="-1" role="dialog" aria-labelledby="modal-popup" aria-hidden="true">

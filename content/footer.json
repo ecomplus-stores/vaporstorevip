@@ -1,11 +1,11 @@
 {
   "description": {
-    "title": "",
-    "text": ""
+    "title": "VaporStore -  Os melhores aparelhos!",
+    "text": "Loja especializada em aparelhos para materiais secos e acessórios. Trabalhamos exclusivamente com produtos originais. Garantia assegurada! Seu novo aparelho pode ser portátil ou de mesa. Somos revenda autorizada da Arizer, Boundless, Da Vinci e Vapir. Trabalhamos também com Pax, Mighty, Volcano, Firefly, Flowermate e Xvape Fog."
   },
   "links_1": {
     "list_pages": true,
-    "title": "Páginas",
+    "title": "Informações",
     "list": []
   },
   "links_2": {
@@ -14,28 +14,35 @@
     "list": []
   },
   "contacts": {
-    "title": "Contatos",
-    "phone_wpp": true,
-    "socials": true,
+    "title": "Atendimento",
+    "phone_wpp": false,
+    "socials": false,
     "email": true,
     "address": true
   },
   "stamps": [
     {
-      "src": "/img/uploads/ssl-safe.png",
-      "alt": "Secure connection",
-      "width": 150,
-      "height": 62
+      "src": "/img/uploads/GoogleSafeBrowsing.png",
+      "alt": "Google Safe Browsing",
+      "link": "http://www.google.com/safebrowsing/diagnostic?site=www.vaporstore.com.br"
     }
   ],
   "payment_methods": {
-    "pix": true,
-    "visa": true,
-    "mastercard": true,
-    "elo": true,
-    "amex": true,
-    "hipercard": true,
-    "boleto": true
+    "bb": false,
+    "visa": false,
+    "boleto": false,
+    "aura": false,
+    "banrisul": false,
+    "elo": false,
+    "hipercard": false,
+    "hsbc": false,
+    "bradesco": false,
+    "santander": false,
+    "mastercard": false,
+    "citibank": false,
+    "mais": false,
+    "pix": false,
+    "itau": false
   },
-  "credits": ""
+  "credits": "VaporStore - © 2024 Todos os direitos reservados "
 }
