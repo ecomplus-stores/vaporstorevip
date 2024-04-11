@@ -1,5 +1,5 @@
 {
-  "domain": "www.vaporstore.com.br",
+  "domain": "vaporstorevip.netlify.app",
   "currency_symbol": "R$",
   "primary_color": "#313131",
   "theme": {
@@ -7,7 +7,7 @@
     "custom": "_"
   },
   "bg_color": "#fff",
-  "repository": "ecomplus-stores/vapor-store",
+  "repository": "ecomplus-stores/vaporstorevip",
   "logo": "/img/uploads/logo.png",
   "name": "VaporStore -  Os melhores aparelhos!",
   "short_name": "VaporStore",
@@ -15,6 +15,8 @@
   "currency": "BRL",
   "mini_logo": "",
   "font_family": "_",
+  "currency_symbol": "R$",
+  "country_code": "BR",
   "favicon": "/img/uploads/favicon.png",
   "icons_font": "_",
   "country_code": "BR",
